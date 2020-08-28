@@ -1,14 +1,13 @@
 from django.shortcuts import render
-from .models import Boards
+from .models import Boards, Picture
 from rest_framework.generics import (
     ListAPIView,
     CreateAPIView,
     RetrieveUpdateDestroyAPIView,)
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .permissions import IsOwnerProfile
-from .serializers import BoardSerializer
-from rest_framework import filters
-from rest_framework import status
+from .serializers import BoardSerializer, PictureSerializer
+from rest_framework import filters, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -40,3 +39,27 @@ class BoardSearchAPIView(ListAPIView):
     queryset = Boards.objects.all()
     serializer_class = BoardSerializer
     permission_classes=[IsOwnerProfile, IsAuthenticated]
+
+class BoardListView(generics.ListAPIView):
+
+    serializer_class = BoardSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Boards.objects.filter(user=user)
+
+
+class PictureCreateView(CreateAPIView):
+    queryset= Picture.objects.all()
+    serializer_class=PictureSerializer
+
+
+class PictureDetailView(RetrieveUpdateDestroyAPIView):
+    queryset=Picture.objects.all()
+    serializer_class=PictureSerializer
+    # permission_classes=[IsOwnerProfile, IsAuthenticated]
+
+class PictureListView(generics.ListAPIView):
+
+    queryset = Picture.objects.all()
+    serializer_class = PictureSerializer

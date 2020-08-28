@@ -18,7 +18,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['localhost','1f2887e33cb5.ngrok.io',]
+ALLOWED_HOSTS = ['localhost','2ba554512d4a.ngrok.io',]
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_auth',
+    'corsheaders',
     'rest_auth.registration',
     'rest_framework',
     'rest_framework.authtoken',
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -168,6 +170,8 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587 
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ACCOUNT_SESSION_REMEMBER = True 
 ACCOUNT_USERNAME_REQUIRED = False 
