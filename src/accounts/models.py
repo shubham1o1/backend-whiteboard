@@ -25,8 +25,8 @@ class CustomUser(AbstractUser):
         ),
     )
 
-    duration = models.IntegerField() 
-    
+    duration = models.IntegerField(default=1) 
+
     def __str__(self):
         return self.email
 

@@ -18,7 +18,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['91423df715b5.ngrok.io',]
 
 
 # Application definition
@@ -158,7 +158,7 @@ REST_AUTH_SERIALIZERS = {
 
 ACCOUNT_ADAPTER = 'accounts.adapter.CustomAccountAdapter'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
 EMAIL_USE_TLS = True

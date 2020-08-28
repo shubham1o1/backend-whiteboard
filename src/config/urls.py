@@ -27,7 +27,7 @@ urlpatterns = [
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
 
     #api docs
-    path(r'docs/', include_docs_urls(title='Physician API')),
+    path(r'docs/', include_docs_urls(title='Whiteboard API')),
 
 
 ]
