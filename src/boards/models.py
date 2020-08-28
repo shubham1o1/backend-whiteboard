@@ -11,3 +11,6 @@ class Boards(models.Model):
     extras = models.JSONField()
     picture = models.ImageField(upload_to='notes_pic/')
     date_created = models.DateTimeField(default= timezone.now)
+
+    def __str__(self):
+        return self.title

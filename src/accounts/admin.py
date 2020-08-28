@@ -13,4 +13,8 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
     list_display = ['id', 'email', 'username', 'user_type', 'is_premium', 'duration']
 
+    fieldsets = UserAdmin.fieldsets + (
+        ('Extra Fields', {'fields': ('user_type',)}),
+    )
+
 admin.site.register(CustomUser, CustomUserAdmin)
