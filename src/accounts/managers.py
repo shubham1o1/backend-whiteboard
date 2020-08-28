@@ -8,7 +8,7 @@ class CustomUserManager(BaseUserManager):
     Custom user model manager where email is the unique identifiers
     for authentication instead of usernames.
     """
-    def create_user(self, email, password, user_type, **extra_fields):
+    def create_user(self, email, password, user_type, is_premium, duration, **extra_fields):
         """
         Create and save a User with the given email and password.
         """
@@ -16,15 +16,9 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_('The Email must be set'))
         email = self.normalize_email(email)
         # user_type = self.user_type
-        user = self.model(email=email, user_type = user_type, **extra_fields)
+        user = self.model(email=email, user_type = user_type, is_premium = is_premium, duration=duration, **extra_fields)
         user.set_password(password)
         user.save()
-        if user_type == 1:
-            models.Patient.objects.create(user = user)
-            print("patient user created")
-        if user_type == 2:
-            models.Doctor.objects.create(user = user)
-            print("Doctor user created")
         return user
 
     def create_superuser(self, email, password, **extra_fields):
@@ -39,4 +33,4 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_('Superuser must have is_staff=True.'))
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(_('Superuser must have is_superuser=True.'))
-        return self.create_user(email, password, user_type=3, **extra_fields)
+        return self.create_user(email, password, user_type=2, **extra_fields)

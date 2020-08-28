@@ -23,7 +23,10 @@ class CustomUser(AbstractUser):
         help_text=_(
             'Designates whether the user is premium or not'
         ),
-    ) 
+    )
+
+    duration = models.IntegerField() 
+    
     def __str__(self):
         return self.email
 
