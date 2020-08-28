@@ -30,6 +30,9 @@ class CustomRegisterSerializer(RegisterSerializer):
     user_type = serializers.ChoiceField(
         choices = USER_TYPE_CHOICES,
         required=True)
+    is_premium = serializers.BooleanField()
+
+    duration = serializers.IntegerField(default=1) 
     
     class Meta:
         model = CustomUser
