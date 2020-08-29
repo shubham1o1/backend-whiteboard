@@ -14,7 +14,7 @@ class BoardSerializer(serializers.ModelSerializer):
         fields = ['idx','title', 'extras', 'picture']
 
     ### COMMENT FROM HERE ####
-    def update(self, obj, validated_data):
+    def partial_update(self, obj, validated_data):
         extras = validated_data.pop("extras")
 
         available_keys = obj.extras.keys()
