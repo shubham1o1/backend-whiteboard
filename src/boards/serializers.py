@@ -20,7 +20,7 @@ class BoardSerializer(serializers.ModelSerializer):
         available_keys = obj.extras.keys()
 
         for key in extras:
-            obj.extras.append({"key": extras[key]})
+            obj.extras[key] = extras[key]
 
         obj.save()
         obj.update(validated_data)
