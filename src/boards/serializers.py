@@ -13,6 +13,7 @@ class BoardSerializer(serializers.ModelSerializer):
         model = Boards
         fields = ['idx','title', 'extras', 'picture']
 
+    ### COMMENT FROM HERE ####
     def update(self, obj, validated_data):
         extras = validated_data.pop("extras")
 
@@ -24,6 +25,7 @@ class BoardSerializer(serializers.ModelSerializer):
         obj.save()
         obj.update(validated_data)
         return obj
+    ### TILL HERE ###
 
 '''
 class CustomRegisterSerializer(serializers.ModelSerializer):
