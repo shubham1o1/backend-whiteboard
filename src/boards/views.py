@@ -7,9 +7,11 @@ from rest_framework.generics import (
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .permissions import IsOwnerProfile
 from .serializers import BoardSerializer, PictureSerializer
-from rest_framework import filters, generics
+from rest_framework import filters, generics, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+import json
+
 
 # Board Views:
 class BoardsCreateView(CreateAPIView):
@@ -52,6 +54,14 @@ class BoardListView(generics.ListAPIView):
 class PictureCreateView(CreateAPIView):
     queryset= Picture.objects.all()
     serializer_class=PictureSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = PictureSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PictureDetailView(RetrieveUpdateDestroyAPIView):

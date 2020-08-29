@@ -11,9 +11,9 @@ class BoardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Boards
-        fields = ['idx','title','user', 'extras', 'picture']
+        fields = ['idx','title', 'extras', 'picture']
 
 class PictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Picture
-        fields = ['image']
+        fields = ['idx', 'image']
